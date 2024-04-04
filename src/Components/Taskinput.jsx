@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { addTask } from './TaskActions';
 import Home from './Home';
-
-
 import { useNavigate } from 'react-router-dom';
 
 function Taskinput() {
@@ -13,11 +10,9 @@ function Taskinput() {
 
   function handleAdd() {
     if (data.trim() !== '') {
-      
       const existingData = JSON.parse(localStorage.getItem('todoList')) || [];
       const updatedData = [...existingData, data];
       localStorage.setItem('todoList', JSON.stringify(updatedData));
-
       // Clear input after adding
       setData('');
     }
@@ -34,32 +29,28 @@ function Taskinput() {
   return (
     <>
       <Home />
-      <div style={{ marginTop: "10%", marginBottom: "5%" }} className="container w-50 shadow">
-        <div className="card-body">
-          <div className='d-flex justify-content-around '>
-            <h1>Todo List</h1>
+      <div className="container mt-5 mb-3">
+        <div className="card shadow">
+          <div className="card-body">
+            <div className='d-flex justify-content-center'>
+              <h1>Todo List</h1>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                value={data}
+                onChange={handleChange}
+                className="form-control"
+                type="text"
+                placeholder="Enter task..."
+              />
+              <div className="input-group-append">
+                <button onClick={handleAdd} className="btn btn-warning">
+                  Add
+                </button>
+              </div>
+            </div>
+            <button onClick={HandleClick} className='btn btn-primary btn-block'>View List</button>
           </div>
-          <br />
-          <input
-            value={data}
-            onChange={handleChange}
-            className="form-control w-75 d-flex"
-            style={{ marginTop: "-10px", marginLeft: "60px" }}
-            type="text"
-            placeholder=""
-          />
-          <br />
-          <br />
-
-          <button onClick={handleAdd} style={{ marginTop: "-12px", marginLeft: "280px" }} className="btn btn-warning w-2 ">
-            <strong>Add</strong>
-          </button>
-          <br />
-          <br />
-          <button onClick={HandleClick} style={{ marginLeft: "230px" }} className='btn btn-primary w-25 '>View List</button>
-
-          <br />
-          <p style={{ fontSize: 12 }}> </p>
         </div>
       </div>
     </>
